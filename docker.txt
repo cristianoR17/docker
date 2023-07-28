@@ -1,12 +1,136 @@
-comando docker
-docker ps -a -> lisar container
+Docker
+	-> permite a execução  em cada componente em um containrer separado
+    ->cada containrer possui suas proprias libs/deps
+	-> mesmo SO, mais em ambientes separados
+	
 
-docker start nginx-teste > iniciar container
+	
 
-docker exec -it nginx-teste bash -> entrar no container
+docker image -> template
 
-automoção
-docker build -t nome_do_container
+docker contariner -> sao as intancias das imagens executada de forma isolada
 
+dockerfile usado para gerar as instruões de crias as imagens
+
+
+DOCKER COMANDOS
+	docker run -> executa um containrer a partir de uma imagem
+	docker stop [container ou id co container]
+	docker rm [container id ou container nome]
+	docker kill [container id ou container nome]
+	
+	docker imagens
+	docker rmi [id-imagem] -> deleta imagens
+	docker pull [imagem]
+	docker exec [id] [comando]
+	docker push user/name
+	
+	CONCEITOS
+		docker attached -> docker run imagen
+		docker detached -> docker run -d imagen
+		docker interactive mode -> docker run -it imagen
+		
+		docker rmi [imagem]
+		
+		docker run -d --name [container-name] image:tag
+		docker run -d -p hostport:containeport --name contariner-name image:tag
+		docker inspect [id ou name]
+		docker logs [id ou name]
+        docker exec [id] [comando]
+		docker top id
+		docker stats id
+		
+		exemplos:
+			docker run -d --name my-ctn httpd:alpine3.15
+			docker run -d -p 3000:80 --name ctr-nginx nginx:mainline-alpine
+			docker stop $(docker ps -q)
+			docker push cristianooliveira78/my-python-img:v1.0
+			docker login
+			
+			
+		
+DOCKER IMAGES
+
+	Docker file
+	=> instrucao + argumentos
+		from mode
+		WORKDIR/myapp
+		COPY pkg json .
+		RUN 
+		COPY ..
+		EXPOSE 
+		CMD
+		
+		docker build . docker-hub-username/image-name:tag
+		
+		Variaveis
+
+DOCKER VOLUMES
+	docker run -d - port:port -v /hostdir/contaiwork contariner-name image:tag
+	
+	 docker volume ls
+	 
+	 
+DOCKER NETWOARK
+ Drives:
+	brigde:
+	host:
+	none:
+	plugins:
+	Macvlan
+	Overlay
+		
+		docker network ls
+		docker network creat [rede]
+		docker network create -d [DRIVES]macvlan my-mac-net [nome rede]
+		docker inspect my-ctr
+		docker network disconnect [rede] [ctr]
+		docker network rm [rede/redes]
+		
+		exeemplos
+		docker network create -d macvlan my-mac-net my-mac-net
+		docker run -d --name my ctr --net devops-net redis (conectando um container)
+		docker network inspect my-ctr (inspecionando)
+		
+		
+YAML
+	linguagem de serialização de dados, linguagem de marcação
+	
+	bloco de contruçao
+		par chave/valor
+		array/lista
+		diclionary/map
+		
+DoCKER COMPOSE
+	Ferramenta que executa aplicativos  docker em varios containers
+	
+DOCKER CONTAINERS
+	
+	Oquestração -> kurbenetes, open shift(redhat), Rancher e Swanrm
+
+		Docker SWan
+			manager -> gerencia so works(Nós)
+				docker swarm join-token manager
+				docker swarm leave (defaz a parte do swarm)
+								
+				docker service create --name nginx-swarm --replicas 3 -p 80:80 nginx
+				docker service ls
+				docker service ps
+				docker service rm 
+				docker servce inspect XXXX
+				docker service scale [service name]=[replica]
+				docker service update --image [image:version] service id
+				ocker service update --network-add [network:name] service id
+				
+			Work -> (Nós)
+				docker node ls
+				docker node rm
+			    docker node update --availability drain xxxxxxxx
+			
+			
+		
+
+
+	
 
 

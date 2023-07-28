@@ -1,0 +1,12 @@
+comando docker
+docker ps -a -> lisar container
+
+docker start nginx-teste > iniciar container
+
+docker exec -it nginx-teste bash -> entrar no container
+
+automoção
+docker build -t nome_do_container
+
+
+
